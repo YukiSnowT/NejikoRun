@@ -17,6 +17,9 @@ public class TitleController : MonoBehaviour
 
     public void OnStartButtonClicked()
     {
+        //Mainシーンに現在の難易度設定の値を渡す・次回やる！
+
+        //シーン遷移
         SceneManager.LoadScene("Main");
     }
 }
