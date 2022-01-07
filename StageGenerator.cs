@@ -8,8 +8,12 @@ public class StageGenerator : MonoBehaviour
 
     int currentChipIndex;
 
+    GameObject[] stageChips;
+
     public Transform character; //ターゲットキャラクター
-    public GameObject[] stageChips; //ステージ配列
+    public GameObject[] stageChipsNormal; //ステージ配列 normal
+    public GameObject[] stageChipsHard; //ステージ配列 hard
+    public GameObject[] stageChipsExpart; //ステージ配列 expart
     public int startChipIndex; //自動生成開始インデックス
     public int preInstantiate; //生成先読み個数
     public List<GameObject> generatedStageList = new List<GameObject>(); //生成済みステージのリスト。Listは動的に要素の追加や削除ができる機能付きの配列
@@ -17,6 +21,10 @@ public class StageGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //stageChipsに難易度に対応したstageChipsNormal等をコピーする
+        //現在ノーマルのみ。次回追加！！
+        stageChipsNormal.CopyTo(stageChipsNormal,0);
+
         currentChipIndex = startChipIndex -1;
         UpdateStage(preInstantiate);
     }
@@ -57,6 +65,7 @@ public class StageGenerator : MonoBehaviour
     //指定のインデックス位置にStageオブジェクトをランダム生成
     GameObject GenerateStage(int chipIndex)
     {
+        GameObject[] stageChips = stageChipsNormal;
         int nextStageChip = Random.Range(0,stageChips.Length);
 
         GameObject stageObject = (GameObject)Instantiate(
