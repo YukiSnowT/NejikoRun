@@ -22,8 +22,18 @@ public class StageGenerator : MonoBehaviour
     void Start()
     {
         //stageChipsに難易度に対応したstageChipsNormal等をコピーする
-        //現在ノーマルのみ。次回追加！！
-        stageChipsNormal.CopyTo(stageChipsNormal,0);
+        if(TitleController.modeSelect==0)
+        {
+            stageChips = stageChipsNormal;
+        }
+        else if(TitleController.modeSelect==1)
+        {
+            stageChips = stageChipsHard;
+        }
+        else if(TitleController.modeSelect==2)
+        {
+            stageChips = stageChipsExpart;
+        }
 
         currentChipIndex = startChipIndex -1;
         UpdateStage(preInstantiate);
@@ -65,7 +75,7 @@ public class StageGenerator : MonoBehaviour
     //指定のインデックス位置にStageオブジェクトをランダム生成
     GameObject GenerateStage(int chipIndex)
     {
-        GameObject[] stageChips = stageChipsNormal;
+        // GameObject[] stageChips = stageChipsNormal;
         int nextStageChip = Random.Range(0,stageChips.Length);
 
         GameObject stageObject = (GameObject)Instantiate(

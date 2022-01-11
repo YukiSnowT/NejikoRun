@@ -26,11 +26,19 @@ public class GameController : MonoBehaviour
             enabled = false;
 
             //ハイスコア更新
-            if(PlayerPrefs.GetInt("HighScore") < score)
+            if(PlayerPrefs.GetInt("HighScoreN") < score & TitleController.modeSelect == 0)
             {
-                PlayerPrefs.SetInt("HighScore",score);
+                PlayerPrefs.SetInt("HighScoreN",score);
             }
-
+            if(PlayerPrefs.GetInt("HighScoreH") < score & TitleController.modeSelect == 1)
+            {
+                PlayerPrefs.SetInt("HighScoreH",score);
+            }
+            if(PlayerPrefs.GetInt("HighScoreE") < score & TitleController.modeSelect == 2)
+            {
+                PlayerPrefs.SetInt("HighScoreE",score);
+            }
+        
             //2秒後にReturntoTitleを呼び出す
             Invoke("ReturnToTitle",2.0f);
         }
